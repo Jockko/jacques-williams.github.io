@@ -35,11 +35,16 @@ function isArray(value) {
  */
 function isObject(value) {
     // YOUR CODE BELOW HERE //
-    if(typeOf(value) === "object"){
-         return true
+    //if its an array, date, or null
+   if(Array.isArray(value)) {
+    //return false
+    //console.log(value, 'dimwit')
+    return false;
+   }
+   if(typeof(value) === "object"){
+        console.log(value);
+        return true
     }
-    else return false;
-    
     
     
     // YOUR CODE ABOVE HERE //
