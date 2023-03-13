@@ -111,13 +111,14 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    return function(){
-        if(test(strings)){
-            return true
-        }
+   for(var i = 0; i < strings.length; i++){
+       if(!test(strings[i])){
+           return false;
+       }
+    }
+    return true;
     }
     // YOUR CODE ABOVE HERE //
-}
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&

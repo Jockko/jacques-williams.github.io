@@ -35,16 +35,14 @@ function isArray(value) {
  */
 function isObject(value) {
     // YOUR CODE BELOW HERE //
-    //if its an array, date, or null
-   if(Array.isArray(value)) {
-    //return false
-    //console.log(value, 'dimwit')
-    return false;
-   }
-   if(typeof(value) === "object"){
-        console.log(value);
-        return true
+    //if its an array, date, or null return false
+    if(value === null || Array.isArray(value) || value instanceof Date || value === undefined){
+        return false;
     }
+  if(typeof(value) === "object"){
+    return true;
+  }
+  return false;
     
     
     // YOUR CODE ABOVE HERE //
@@ -57,13 +55,19 @@ function isObject(value) {
  * TIP: Similar to isObject, but we must return true if the value is an Array.
  */
 function isCollection(value) {
-    // YOUR CODE BELOW HERE //
-    
-    
-    
-    
+    // YOUR CODE BELOW HERE // 
+ if(value === null || value instanceof Date || value === undefined){
+        return false;
+    }
+ else if(Array.isArray(value) || typeof(value) === "object"){
+    return true;
+  }
+    return false;
+    // if(Array.isArray()typeof value === "object"){
+    //     return true;
+};
     // YOUR CODE ABOVE HERE //
-}
+
 
 /**
  * Given an input value, return the type of the value as a String
@@ -86,7 +90,19 @@ function isCollection(value) {
  */ 
 function typeOf(value) {
     // YOUR CODE BELOW HERE //
-    
+    if(Array.isArray(value)){
+        return "array";
+    }
+    else if(value === undefined){
+        return "undefined";
+    }
+    else if(value === null){
+        return "null";
+    }
+    else if(value instanceof Date){
+        return "date";
+    }
+ return typeof value;
     
     
     
