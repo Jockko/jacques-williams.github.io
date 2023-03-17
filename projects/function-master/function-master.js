@@ -189,21 +189,23 @@ return false
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-    console.log(array[0].friends, name);
+    //console.log(array[0].friends, name);
     //return a list of all the names that name is NOT friends with
     //check the array
     let container = [];
+    console.log(array);
     for(let i = 0; i < array.length; i++){
-        console.log(array[i].friends)
+        let flag = false;
         //if the friends property contains a friend that matches "name"
-        if(Array.isArray(array[i].friends)){
             for(let j = 0; j < array[i].friends.length; j++){
-                console.log("You dat nigga")
-             if(array[i].friends[j] !== name){
-                 container.push(array[i][j])
-             }
+             if(array[i].friends[j] === name){
+                //if they are a friend set the flag to true
+                flag = true;
             }
+        }
 
+        if(flag === false && array[i].name !== name){
+            container.push(array[i].name);
         }
     }
     return container
@@ -214,6 +216,9 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
+    //should update the property key on object with value
+    object[key] = value;
+    return object;
 
 }
 
@@ -222,7 +227,13 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
+    for(var i = 0; i < array.length; i++){
+        console.log("Hey there");
+        if(object.hasOwnProperty(array[i])){
+             delete object[array[i]];
+            }
 
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -230,7 +241,17 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+//must remove duplicates inside the array
+//we don't want to alter the given array
+let nonDuplicates = [];
+for(let i = 0; i < array.length; i++){
+    //check for non duplicates and push them inside duplicate array
+    if(nonDuplicates.includes(array[i]) === false){
+//push
+nonDuplicates.push(array[i]);
+    }
+}
+return nonDuplicates
 }
 
 //////////////////////////////////////////////////////////////////////

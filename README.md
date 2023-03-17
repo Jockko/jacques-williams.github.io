@@ -23,7 +23,7 @@ c file
 3) In terminal, type => git push
 
 ## How to install new projects
-1) In terminal, type => code ~/.bashrc
+1) In terminal, type =>  
 2) On line 4 of bashrc file, type => export CHE_PROJECTS_ROOT=/workspace
 3) Exit out of bashrc file
 4) "Kill" terminal by clicking recycle bin icon
