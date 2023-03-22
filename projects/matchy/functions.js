@@ -65,9 +65,9 @@ function remove(array, name){
 //////////////////////////////////////////////////////////////////////
 function add(animals, animal){
 //checks to see if animal object has a name property length > 0
-console.log(animal, 11);
+//console.log(animal, 11);
 if((animal.name.length > 0) && (animal.species.length > 0)){
-console.log(555)
+//console.log(555)
 for(let i = 0; i < animals.length; i++){
     //check if it has a unique name also
     if(animals[i].name !== animal.name){
@@ -75,7 +75,7 @@ for(let i = 0; i < animals.length; i++){
         animals.push(animal);
     }
     return
-}
+};
 }
 //checks to see if animal object has a species with a lenght > 0;
 }

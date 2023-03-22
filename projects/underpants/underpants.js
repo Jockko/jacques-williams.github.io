@@ -398,21 +398,39 @@ _.every = function(collection, func){
     let allItemsPassed = true;
     if(func === undefined){
         if(Array.isArray(collection)){
-        //determine if current value is falsy
+            for(let i = 0; i < collection.length; i++){
+                if(!collection[i]){
+                    allItemsPassed = false;
+                }
+            }
+        }
+        else {
+            for(let key in collection){
+                if(!collection[key]){
+                    allItemsPassed = false;
+                }
+            }
+        }
+    }
+       else { 
+        if(Array.isArray(collection)){
         for(let i = 0; i < collection.length; i++){
-            if(!collection[i]){
+            if(!func(collection[i], i, collection)){
                 allItemsPassed = false;
             }
         }
     }
-    else {
+    
+
+    else{
         for(let key in collection){
-            if(!collection[key]){
+            if(!func(collection[key], key, collection)){
                 allItemsPassed = false;
             }
+            else func(collection[key], key, collection)
         }
     }
-}
+    }
 return allItemsPassed;
 }
 
@@ -437,7 +455,42 @@ return allItemsPassed;
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = function(collection, func){
+let passed = false;
+if(func === undefined){
+if(Array.isArray(collection)){
+for(let i = 0; i < collection.length; i++){
+    if(collection[i]){
+        passed = true;
+    }
+}
+}
+else {
+    for(let key in collection){
+        if(collection[key]){
+            passed = true;
+        }
+    }
+}
+}
+else {
+    if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+           if(func(collection[i], i, collection)){
+            passed = true;
+           } 
+        }
+    }
+    else {
+        for(let key in collection){
+            if(func(collection[key], key, collection)){
+                passed = true;
+            }
+        }
+    }
+}
+return passed;
+}
 
 /** _.reduce
 * Arguments:
@@ -464,10 +517,17 @@ let result;
 if(seed === undefined){
     //set seed to the first element
     result = array[0];
-    for(let i = 0; i < array.length; i++){
-        result = func(result, array[i])
+    for(let i = 1; i < array.length; i++){
+        result = func(result, array[i], i, array)
     }
 }
+else{
+    result = seed;
+    for(let i = 0; i < array.length; i++){
+        result = func(result, array[i], i, array);
+    } 
+}
+return result;
 //else seed is defined
 }
 
@@ -486,6 +546,10 @@ if(seed === undefined){
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
+_.extend = function(obj1, obj2, ...objects){
+    //Object.assign actually adds the properties of an object to the first argument you give it. aka another object
+   return Object.assign(obj1, obj2, ...objects)
+}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
