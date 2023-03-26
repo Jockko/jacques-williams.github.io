@@ -54,8 +54,8 @@ var sumBelow = function(n) {
 if(n === 0){
   return 0;
 }
-else if(n > 0){
-  return n + sumBelow(n - 1);
+ if(n > 0){
+  return (n - 1) + sumBelow(n - 1);
 }
 else if(n < 0){
   return n + 1 + sumBelow(n + 1);
@@ -65,6 +65,22 @@ else if(n < 0){
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
+//should return the integers between two given numbers inside a new array
+if(y > x){
+if(y - 1 === x){
+return [];
+}
+else {
+  //create a new array
+  let a
+}
+}
+else if(x > y){
+
+}
+
+//each time I call the function I want to push the value between x and y inside of nums
+
 
 };
 

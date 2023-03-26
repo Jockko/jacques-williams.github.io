@@ -254,14 +254,22 @@ _.filter = function(array, func){
     //call func for each element in array passing the arguments element, index, array.
     let newArr = [];
     for(let i = 0; i < array.length; i++){
-        //if the function called on each element is truthy
-        //check to see which ones are true
-        if(func(array[i], i, array)){
-            newArr.push(array[i]);
-        }
-    }
+            //if the function called on each element is truthy
+            //check to see which ones are true
+            if(func(array[i], i, array)){
+                    newArr.push(array[i]);
+                }
+            }
+    //  _.each(array, function(val){
+    //     if(func(val)){
+    //        console.log(val)
+    //        newArr.push(val);
+    //        console.log(newArr)
+    //    }
+    // })
     return newArr;
 }
+
 
 /** _.reject
 * Arguments:
