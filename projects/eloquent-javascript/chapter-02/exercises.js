@@ -11,7 +11,25 @@ function triangles() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function fizzBuzz() {
-  
+  for(var num = 1; num <= 15; num++){
+    //if a number divided by 5 and 3 has no remainder
+    if(num % 5 === 0 && num % 3 === 0){
+        //print FizzBuzz
+        console.log("fizzbuzz");
+    }
+    //if the number is divisible by 3 only
+    else if(num % 3 === 0){
+        //print Fizz
+        console.log("fizz");
+    }
+    //if the number is divisible by 5 only
+    else if(num % 5 === 0){
+        //print Buzz
+        console.log("buzz")
+    }
+    //
+    else console.log(num)
+}
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -465,6 +465,7 @@ return allItemsPassed;
 */
 _.some = function(collection, func){
 let passed = false;
+
 if(func === undefined){
 if(Array.isArray(collection)){
 for(let i = 0; i < collection.length; i++){

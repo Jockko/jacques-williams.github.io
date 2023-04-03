@@ -64,19 +64,24 @@ else if(n < 0){
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
+var range = function(x, y, output = []) {
 //should return the integers between two given numbers inside a new array
-if(y > x){
-if(y - 1 === x){
-return [];
-}
-else {
-  //create a new array
-  let a
-}
+if(x === y){
+  return [];
 }
 else if(x > y){
-
+if(x - 1 === y){
+  return output;
+}
+output.push(x - 1);
+return range(x - 1, y, output)
+}
+else if(x < y){
+if(x + 1 === y){
+return output;
+}
+output.push(x + 1);
+return range(x + 1, y, output)
 }
 
 //each time I call the function I want to push the value between x and y inside of nums
@@ -107,10 +112,16 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
-  if(n === 0){
-    //test require false to be returned
-    return false;
-  }
+ var r = n / 2;
+ if(n === 2 || n === 1){
+return true;
+ }
+ else if(r < 2){
+return false;
+ }
+ else {
+  return powerOfTwo(r);
+ }
   //if even AND a power of 2
 //   else if(n % 2 === 0 && ){
 // //if so return true;

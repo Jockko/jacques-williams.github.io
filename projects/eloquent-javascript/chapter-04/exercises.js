@@ -66,8 +66,29 @@ function nth() {
 // deepEqual ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function deepEqual() {
+function deepEqual(x, y) {
+//determine if x and y are both objects
+if(typeof x !== 'object' && typeof y !== "object" ){
+return x === y
+}
+//determine if one OR the other is an object
+if(typeof x !== 'object' || typeof y !== 'object'){
+  return false;
+}
+//x and y are both complex pieces of data
+let xKeys = Object.keys(x); //['a'];
+let yKeys = Object.keys(y);//['a'];
+if(xKeys.length !== yKeys.length){
+return false;
+}
+//iterate over every value to make sure the keys match. Either array is fine to use. We just chose xKeys
+for(let i = 0; i < xKeys.length; i++){
+  if(!yKeys.includes(xKeys[i]) || !deepEqual(x[xKeys[i]], y[xKeys[i]])){
+    return false;
+}
 
+}
+return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

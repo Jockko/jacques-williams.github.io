@@ -4,6 +4,7 @@
 
 var customers = require('./data/customers.json');
 var _ = require("underbar");
+const object = require('underbar/object');
 
 
 /**
@@ -14,8 +15,7 @@ var _ = require("underbar");
  * 2. Solve all problems as outlined in the README.
  *
  * 3. We started the first one for you as an example! Make the rest in that style.
- *
- * 4. To test your work, run the following command in your terminal:
+ * * 4. To test your work, run the following command in your terminal:
  *
  *    npm start --prefix ./jacques-williams.github.io/projects/let-s-get-functional
  *
@@ -23,26 +23,85 @@ var _ = require("underbar");
  */
 
 var maleCount = function(array) {
-console.log(array);
-let num = 0;
-return array.filter(val => {if(val === "male"){
-num++
-}
-return num;
-});
+//console.log(array);
+//new array will only contain values that pass the condition
+//the condition is to count the males
+return _.filter(array, function(object){
+    if(object.gender === "male"){
+        return object
+    }
+}).length;
+
 };
 
-var femaleCount;
+var femaleCount = function(array){
+    return _.reduce(array, function(count, currentObj){
+        if(currentObj.gender === 'female'){
+            count++
+        }
+        return count;
+    }, 0)
+}
 
-var oldestCustomer;
+var oldestCustomer = function(array){
+    //find the oldest customer's name
 
-var youngestCustomer;
+    let custObj = _.reduce(array, function(prevObj, currentObj){
+        if(prevObj.age < currentObj.age){
+            prevObj = currentObj;
+        }
+        //console.log(prevObj.name)
+       return prevObj
+    })
+    return custObj.name
+}
 
-var averageBalance;
+var youngestCustomer = function(array){  
+    let custObj = _.reduce(array, function(prevObj, currentObj){
+        if(prevObj.age > currentObj.age){
+            prevObj = currentObj;
+        }
+       return prevObj
+    })
+    return custObj.name
+};
 
-var firstLetterCount;
+var averageBalance = function(array){
+   // let lengthCount = 0;
+   
+//    let hasBalance = _.filter(array, function(current){
+//     if(current.balance){
+//         return current;
+//     }
+//    });
+//     return _.reduce(array, function(sum, currentObj){
+//         sum += currentObj.balance
+        
+//     }, 0)/hasBalance.length;
+}
 
-var friendFirstLetterCount;
+var firstLetterCount = function(array, letter){
+    return _.reduce(array, function(count, currentObj){
+        if(currentObj.name[0].toUpperCase() === letter.toUpperCase()){
+            count++;
+        }
+       return count
+    }, 0)
+}
+
+var friendFirstLetterCount = function(array, customer, letter){
+//Find how many friends of a given customer have names that start with a given letter
+let friends = _.filter(array, function(){
+    if(customer.friends){
+        for(let i = 0; i < customer.friends.length; i++){
+            if(customer.friends[i].name[0].toUpperCase() === letter.toUpperCase()){
+                return customer
+            }
+        }
+    }
+})
+return friends.length;
+}
 
 var friendsCount;
 
