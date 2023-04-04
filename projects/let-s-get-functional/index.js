@@ -67,17 +67,20 @@ var youngestCustomer = function(array){
 };
 
 var averageBalance = function(array){
-   // let lengthCount = 0;
-   
-//    let hasBalance = _.filter(array, function(current){
-//     if(current.balance){
-//         return current;
-//     }
-//    });
-//     return _.reduce(array, function(sum, currentObj){
-//         sum += currentObj.balance
-        
-//     }, 0)/hasBalance.length;
+    let balance = _.reduce (array, function(accumulator, current) {
+        let newCurrentBalance = '';
+        // iterate through current balance 
+        for (let i = 0; i < current.balance.length; i++) {
+            // check if current string char isn't $ and isn't , 
+            if (current.balance[i] !== '$' && current.balance[i] !== ',') {
+                // if true add copy the current string char newCurrentBalance 
+                newCurrentBalance += current.balance[i];
+            }
+        } // make newCurrentBalance a number 
+        return accumulator += Number(newCurrentBalance)
+    }, 0)
+    // return the balance / the array length
+    return balance / array.length
 }
 
 var firstLetterCount = function(array, letter){
@@ -91,23 +94,58 @@ var firstLetterCount = function(array, letter){
 
 var friendFirstLetterCount = function(array, customer, letter){
 //Find how many friends of a given customer have names that start with a given letter
-let friends = _.filter(array, function(){
-    if(customer.friends){
-        for(let i = 0; i < customer.friends.length; i++){
-            if(customer.friends[i].name[0].toUpperCase() === letter.toUpperCase()){
-                return customer
-            }
+let person = _.filter(array, function(element){
+    return element.name === customer;
+  })[0];
+  let friends = _.filter(person.friends, function(element){
+      return element.name[0] === letter.toUpperCase() || element.name[0] === letter.toLowerCase; 
+  });
+  return friends.length;
+}
+var friendsCount = function(array, name){
+let friendss = [];
+_.each(array, function(customer){                   //array is customers.json. customer is array[i] element
+    _.each(customer.friends, function(friend){      //customer.friends is array[i].friends array. friend is friend object
+        if (friend.name === name){
+            friendss.push(customer.name);
         }
-    }
+    })
 })
-return friends.length;
+return friendss;
 }
 
-var friendsCount;
+var topThreeTags = function(array){
+    let output = [];
+    let objTags = _.reduce(array, function(acc, current){
+        for (let i = 0; i < current.tags.length; i++){
+            if (acc.hasOwnProperty(current.tags[i])){
+                acc[current.tags[i]]++;
+            } else{
+                acc[current.tags[i]] = 1;
+            }
+        }
+        return acc;
+    }, {});
+    let keyTags = Object.entries(objTags); //array of tags and count
+    keyTags.sort(function(a, b){
+        return b[1] - a[1];
+    });
+    output.push(keyTags[0][0]);
+    output.push(keyTags[1][0]);
+    output.push(keyTags[2][0]);
+    return output;
+}
 
-var topThreeTags;
-
-var genderCount;
+var genderCount = function(array){
+    return _.reduce(array, function(acc, current){
+        if (acc.hasOwnProperty(current.gender)){
+            acc[current.gender]++;
+        } else {
+            acc[current.gender] = 1;
+        }
+        return acc;
+    }, {})
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
